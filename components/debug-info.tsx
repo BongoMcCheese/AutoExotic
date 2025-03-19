@@ -21,7 +21,13 @@ interface DebugInfoProps {
   isDisabled?: boolean // Add a prop to disable the debug info button for users
 }
 
-export function DebugInfo({ apiKey, spreadsheetId, sheetName, errorMessage, isDisabled }: DebugInfoProps) {
+export function DebugInfo({
+  apiKey,
+  spreadsheetId,
+  sheetName,
+  errorMessage,
+  isDisabled = false, // Default to false if not passed
+}: DebugInfoProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -37,7 +43,7 @@ export function DebugInfo({ apiKey, spreadsheetId, sheetName, errorMessage, isDi
           variant="outline"
           size="sm"
           className="absolute bottom-4 right-4"
-          onClick={handleClick} // Handle click to open dialog based on isDisabled state
+          onClick={handleClick}
           disabled={isDisabled} // Disable button if isDisabled is true
         >
           Debug Info
