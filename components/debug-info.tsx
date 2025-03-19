@@ -1,3 +1,4 @@
+"use client"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -17,15 +18,28 @@ interface DebugInfoProps {
   spreadsheetId?: string
   sheetName?: string
   errorMessage?: string
+  isDisabled?: boolean // Add a prop to disable the debug info button for users
 }
 
-export function DebugInfo({ apiKey, spreadsheetId, sheetName, errorMessage }: DebugInfoProps) {
+export function DebugInfo({ apiKey, spreadsheetId, sheetName, errorMessage, isDisabled }: DebugInfoProps) {
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleClick = () => {
+    if (!isDisabled) {
+      setIsOpen(true)
+    }
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="absolute bottom-4 right-4">
+        <Button
+          variant="outline"
+          size="sm"
+          className="absolute bottom-4 right-4"
+          onClick={handleClick} // Handle click to open dialog based on isDisabled state
+          disabled={isDisabled} // Disable button if isDisabled is true
+        >
           Debug Info
         </Button>
       </DialogTrigger>
@@ -99,5 +113,3 @@ export function DebugInfo({ apiKey, spreadsheetId, sheetName, errorMessage }: De
     </Dialog>
   )
 }
-
-
