@@ -51,7 +51,7 @@ export default async function Home() {
         spreadsheetId={spreadsheetId}
         sheetName={sheetName}
         errorMessage={errorMessage}
-        isDiabled= true
+        isDisabled={true}
       />
     </div>
   )
